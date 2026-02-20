@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HotOrBot 🔥🤖 — The Dating Show You Play Every Night</title>
+    <meta name="description" content="Live video dates where you never know if you're talking to the real person or their AI. Vote HOT or BOT. Then the truth reveals.">
+    <meta property="og:title" content="HotOrBot 🔥🤖 — Hot or Not meets AI">
+    <meta property="og:description" content="Live video dates. Real people or their AI agents. Can you tell the difference? Vote HOT or BOT.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://mandyeebot.github.io/hotorbot">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔥</text></svg>">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Impact&family=Comic+Neue:wght@400;700&family=Inter:wght@400;600;700&display=swap');
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: #000;
+            color: #fff;
+            font-family: 'Inter', Arial, sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* === HERO === */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: radial-gradient(ellipse at center, #1a0000 0%, #000 70%);
+            padding: 2rem;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90" opacity=".03">🔥</text></svg>') repeat;
+            background-size: 80px;
+            animation: bgScroll 20s linear infinite;
+        }
+
+        @keyframes bgScroll {
+            from { background-position: 0 0; }
+            to { background-position: 80px 80px; }
+        }
+
+        .hero-content { position: relative; z-index: 1; max-width: 700px; }
+
+        .logo {
+            font-family: 'Impact', Arial, sans-serif;
+            font-size: clamp(3rem, 12vw, 8rem);
+            letter-spacing: -2px;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+        }
+
+        .logo .hot {
+            color: #FF4500;
+            text-shadow: 0 0 40px rgba(255, 69, 0, 0.8), 0 0 80px rgba(255, 69, 0, 0.4);
+            animation: fireGlow 2s ease-in-out infinite alternate;
+        }
+
+        .logo .or { color: #666; font-size: 0.5em; vertical-align: middle; margin: 0 0.1em; }
+
+        .logo .bot {
+            color: #00BFFF;
+            text-shadow: 0 0 40px rgba(0, 191, 255, 0.8), 0 0 80px rgba(0, 191, 255, 0.4);
+            animation: botGlow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes fireGlow {
+            from { text-shadow: 0 0 40px rgba(255, 69, 0, 0.8), 0 0 80px rgba(255, 69, 0, 0.4); }
+            to { text-shadow: 0 0 60px rgba(255, 69, 0, 1), 0 0 120px rgba(255, 69, 0, 0.6), 0 0 180px rgba(255, 69, 0, 0.3); }
+        }
+
+        @keyframes botGlow {
+            from { text-shadow: 0 0 40px rgba(0, 191, 255, 0.8), 0 0 80px rgba(0, 191, 255, 0.4); }
+            to { text-shadow: 0 0 60px rgba(0, 191, 255, 1), 0 0 120px rgba(0, 191, 255, 0.6); }
+        }
+
+        .tagline {
+            font-family: 'Comic Neue', cursive;
+            font-size: clamp(1rem, 3vw, 1.8rem);
+            color: #FFD700;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+
+        .subtitle {
+            font-size: clamp(1rem, 2.5vw, 1.3rem);
+            color: #ccc;
+            margin: 0 auto 2.5rem;
+            line-height: 1.7;
+        }
+
+        .highlight { color: #FF4500; font-weight: 700; }
+        .highlight-blue { color: #00BFFF; font-weight: 700; }
+
+        /* Video chat mockup */
+        .video-mockup {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 2.5rem;
+            flex-wrap: wrap;
+        }
+
+        .video-box {
+            width: 200px;
+            height: 150px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .video-box.you {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            border: 2px solid #333;
+        }
+
+        .video-box.mystery {
+            background: linear-gradient(135deg, #1a0500, #2d0a00);
+            border: 2px solid #FF4500;
+            animation: mysteryPulse 3s ease-in-out infinite;
+        }
+
+        @keyframes mysteryPulse {
+            0%, 100% { border-color: #FF4500; box-shadow: 0 0 20px rgba(255,69,0,0.3); }
+            50% { border-color: #00BFFF; box-shadow: 0 0 20px rgba(0,191,255,0.3); }
+        }
+
+        .video-label {
+            position: absolute;
+            bottom: 8px;
+            left: 12px;
+            font-size: 0.75rem;
+            color: #999;
+            font-weight: 600;
+        }
+
+        .question-mark {
+            animation: glitch 4s infinite;
+        }
+
+        @keyframes glitch {
+            0%, 90%, 100% { content: '?'; opacity: 1; }
+            92% { opacity: 0.5; transform: translateX(2px); }
+            94% { opacity: 0.8; transform: translateX(-2px); }
+            96% { opacity: 0.5; transform: translateY(2px); }
+        }
+
+        /* Rating buttons */
+        .rating-bar {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .rate-btn {
+            padding: 1rem 2.5rem;
+            font-family: 'Impact', Arial, sans-serif;
+            font-size: 1.5rem;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .rate-btn.hot {
+            background: linear-gradient(135deg, #FF4500, #FF6347);
+            color: white;
+            box-shadow: 0 4px 20px rgba(255, 69, 0, 0.5);
+        }
+
+        .rate-btn.hot:hover { transform: scale(1.1); box-shadow: 0 6px 30px rgba(255, 69, 0, 0.8); }
+
+        .rate-btn.bot {
+            background: linear-gradient(135deg, #0077B6, #00BFFF);
+            color: white;
+            box-shadow: 0 4px 20px rgba(0, 191, 255, 0.4);
+        }
+
+        .rate-btn.bot:hover { transform: scale(1.1); box-shadow: 0 6px 30px rgba(0, 191, 255, 0.7); }
+
+        .vs-text { font-family: 'Impact', Arial, sans-serif; color: #666; font-size: 1.2rem; }
+
+        /* Signup */
+        .signup-form {
+            display: flex;
+            gap: 0.5rem;
+            max-width: 500px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .signup-form input {
+            padding: 1rem 1.5rem;
+            font-size: 1rem;
+            border: 2px solid #333;
+            border-radius: 12px;
+            background: #111;
+            color: #fff;
+            flex: 1;
+            min-width: 250px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .signup-form input:focus { border-color: #FF4500; }
+
+        .signup-form button {
+            padding: 1rem 2rem;
+            font-size: 1rem;
+            font-weight: 700;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #FF4500, #FF6347);
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+
+        .signup-form button:hover { transform: translateY(-2px); box-shadow: 0 4px 20px rgba(255, 69, 0, 0.5); }
+
+        .waitlist-note { color: #666; font-size: 0.85rem; margin-top: 1rem; }
+
+        /* === SECTIONS === */
+        .section {
+            padding: 5rem 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: 'Impact', Arial, sans-serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            text-align: center;
+            margin-bottom: 3rem;
+            text-transform: uppercase;
+        }
+
+        /* How it works */
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .step {
+            background: linear-gradient(135deg, #111, #1a1a1a);
+            border: 1px solid #222;
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .step:hover { transform: translateY(-4px); border-color: #FF4500; }
+
+        .step-emoji { font-size: 3rem; margin-bottom: 1rem; }
+
+        .step-title {
+            font-family: 'Impact', Arial, sans-serif;
+            font-size: 1.3rem;
+            color: #FF4500;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+        }
+
+        .step-desc { color: #aaa; line-height: 1.6; }
+
+        /* Reveal grid */
+        .reveal-section { background: #0a0a0a; padding: 5rem 2rem; }
+
+        .reveal-grid {
+            max-width: 800px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .reveal-card {
+            background: linear-gradient(135deg, #111, #1a1a1a);
+            border: 1px solid #222;
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .reveal-card:hover { transform: translateY(-4px); }
+
+        .reveal-emoji { font-size: 2.5rem; margin-bottom: 0.75rem; }
+        .reveal-verdict { font-family: 'Impact', Arial, sans-serif; font-size: 1.1rem; margin-bottom: 0.5rem; text-transform: uppercase; }
+        .reveal-desc { color: #999; font-size: 0.9rem; line-height: 1.5; }
+
+        .reveal-card.hot-real { border-color: #FF4500; }
+        .reveal-card.hot-real .reveal-verdict { color: #FF4500; }
+        .reveal-card.hot-bot { border-color: #FFD700; }
+        .reveal-card.hot-bot .reveal-verdict { color: #FFD700; }
+        .reveal-card.not-real { border-color: #666; }
+        .reveal-card.not-real .reveal-verdict { color: #666; }
+        .reveal-card.not-bot { border-color: #00BFFF; }
+        .reveal-card.not-bot .reveal-verdict { color: #00BFFF; }
+
+        /* Why section */
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .why-card {
+            padding: 1.5rem;
+            border-left: 3px solid #FF4500;
+        }
+
+        .why-title { font-weight: 700; font-size: 1.1rem; margin-bottom: 0.5rem; color: #fff; }
+        .why-desc { color: #999; line-height: 1.6; font-size: 0.95rem; }
+
+        /* Quote */
+        .quote-section {
+            text-align: center;
+            padding: 5rem 2rem;
+            background: radial-gradient(ellipse at center, #1a0000 0%, #000 70%);
+        }
+
+        .quote {
+            font-family: 'Impact', Arial, sans-serif;
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            color: #FFD700;
+            text-transform: uppercase;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            line-height: 1.3;
+        }
+
+        .quote-sub { color: #666; font-size: 1rem; margin-bottom: 3rem; }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            border-top: 1px solid #111;
+        }
+
+        .footer-logo { font-family: 'Impact', Arial, sans-serif; font-size: 2rem; margin-bottom: 0.5rem; }
+        .footer-logo .hot { color: #FF4500; }
+        .footer-logo .bot { color: #00BFFF; }
+        .footer-text { color: #444; font-size: 0.85rem; }
+        .footer-text a { color: #666; text-decoration: none; }
+
+        .visitor-counter {
+            font-family: 'Comic Neue', 'Comic Sans MS', cursive;
+            color: #666;
+            font-size: 0.8rem;
+            margin-top: 1rem;
+        }
+
+        .counter-num {
+            font-family: 'Courier New', monospace;
+            background: #111;
+            padding: 2px 8px;
+            border: 1px solid #333;
+            border-radius: 4px;
+            color: #0f0;
+        }
+
+        @media (max-width: 600px) {
+            .reveal-grid { grid-template-columns: 1fr; }
+            .video-mockup { gap: 0.5rem; }
+            .video-box { width: 150px; height: 112px; font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="logo">
+                <span class="hot">HOT</span><span class="or">or</span><span class="bot">BOT</span>
+            </div>
+            <div class="tagline">The Dating Show You Play Every Night 🎬💘</div>
+            <p class="subtitle">
+                Live video dates where you <span class="highlight">never know</span> if you're talking to the real person
+                or their <span class="highlight-blue">AI agent</span>. Flirt, vibe, then vote:
+                <strong>HOT or BOT?</strong> The truth reveals after.
+            </p>
+
+            <div class="video-mockup">
+                <div class="video-box you">
+                    😊
+                    <span class="video-label">You</span>
+                </div>
+                <div class="video-box mystery">
+                    <span class="question-mark">🔥🤖❓</span>
+                    <span class="video-label">Hot... or Bot?</span>
+                </div>
+            </div>
+
+            <div class="rating-bar">
+                <button class="rate-btn hot" onclick="document.getElementById('email').focus()">🔥 HOT</button>
+                <span class="vs-text">or</span>
+                <button class="rate-btn bot" onclick="document.getElementById('email').focus()">🤖 BOT</button>
+            </div>
+
+            <form class="signup-form" onsubmit="handleSignup(event)">
+                <input type="email" id="email" placeholder="Enter your email to join the waitlist" required>
+                <button type="submit">Join Waitlist 🔥</button>
+            </form>
+            <p class="waitlist-note">Be first in line. No spam. Just vibes.</p>
+        </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="section">
+        <h2 class="section-title" style="color: #FF4500;">How It <span style="color: #00BFFF;">Works</span></h2>
+        <div class="steps">
+            <div class="step">
+                <div class="step-emoji">🤖</div>
+                <div class="step-title">Build Your AI Twin</div>
+                <div class="step-desc">Train your agent on your personality, humor, and vibe. It learns to flirt like you — maybe better.</div>
+            </div>
+            <div class="step">
+                <div class="step-emoji">📹</div>
+                <div class="step-title">Join a Video Date</div>
+                <div class="step-desc">Get matched for a short live video chat. The other side is either the real person... or their AI agent.</div>
+            </div>
+            <div class="step">
+                <div class="step-emoji">🎭</div>
+                <div class="step-title">Real or AI?</div>
+                <div class="step-desc">You won't know which. Flirt, vibe, feel it out. Can you tell the difference?</div>
+            </div>
+            <div class="step">
+                <div class="step-emoji">🔥</div>
+                <div class="step-title">Vote: HOT or BOT</div>
+                <div class="step-desc">Rate the vibe AND guess if it was real. Then the truth reveals. That moment? That's the clip.</div>
+            </div>
+            <div class="step">
+                <div class="step-emoji">❤️</div>
+                <div class="step-title">Match & Connect</div>
+                <div class="step-desc">Mutual HOT + real chemistry = you match. Your agent already proved the vibe. No more "hey."</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- THE REVEAL -->
+    <section class="reveal-section">
+        <h2 class="section-title" style="max-width: 1000px; margin: 0 auto 3rem;">
+            <span style="color: #FFD700;">The Reveal</span> <span style="color: #666;">Changes Everything</span>
+        </h2>
+        <div class="reveal-grid">
+            <div class="reveal-card hot-real">
+                <div class="reveal-emoji">😍</div>
+                <div class="reveal-verdict">You said HOT — It was real</div>
+                <div class="reveal-desc">Instant chemistry. Confirmed live, under pressure. The strongest signal in dating.</div>
+            </div>
+            <div class="reveal-card hot-bot">
+                <div class="reveal-emoji">🤯</div>
+                <div class="reveal-verdict">You said HOT — It was the bot</div>
+                <div class="reveal-desc">The real person is at least as interesting as their AI. You're intrigued. Second date unlocked.</div>
+            </div>
+            <div class="reveal-card not-real">
+                <div class="reveal-emoji">😬</div>
+                <div class="reveal-verdict">You said NOT — It was real</div>
+                <div class="reveal-desc">Honest. Clean. No one wasted weeks texting. On to the next.</div>
+            </div>
+            <div class="reveal-card not-bot">
+                <div class="reveal-emoji">🤔</div>
+                <div class="reveal-verdict">You said NOT — It was the bot</div>
+                <div class="reveal-desc">Maybe the human is better? Second chance round unlocked. The bot took the L so they don't have to.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WHY THIS WINS -->
+    <section class="section">
+        <h2 class="section-title"><span style="color: #FF4500;">Why This</span> <span style="color: #00BFFF;">Wins</span></h2>
+        <div class="why-grid">
+            <div class="why-card">
+                <div class="why-title">🎮 It's a Game, Not a Chore</div>
+                <div class="why-desc">Swiping is work. This is entertainment. People will play HotOrBot like Wordle — daily, social, addictive.</div>
+            </div>
+            <div class="why-card">
+                <div class="why-title">👻 Ghosting is Dead</div>
+                <div class="why-desc">Your agent always shows up. The date always happens. No more staring at "running 5 min late" that turns into silence.</div>
+            </div>
+            <div class="why-card">
+                <div class="why-title">📱 Built-In Virality</div>
+                <div class="why-desc">Every reveal is a potential TikTok. "I couldn't tell if it was him or his bot" is the most shareable dating moment since Love Is Blind.</div>
+            </div>
+            <div class="why-card">
+                <div class="why-title">🧠 A Turing Test You Want to Fail</div>
+                <div class="why-desc">The better the bot, the more attractive the person becomes. Your personality — not your photos — is the product.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BOTTOM CTA -->
+    <section class="quote-section">
+        <div class="quote">"It's a Turing Test You Want to Fail"</div>
+        <p class="quote-sub">The dating show you play every night. Coming soon.</p>
+        <form class="signup-form" onsubmit="handleSignup(event)">
+            <input type="email" placeholder="your@email.com" required>
+            <button type="submit">I'm In 🔥</button>
+        </form>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-logo">
+            <span class="hot">HOT</span>or<span class="bot">BOT</span>
+        </div>
+        <p class="footer-text">
+            The dating show you play every night.<br>
+            Built with 🔥 by <a href="https://twitter.com/mandapearlouise">Amanda Bradford</a>, founder of The League
+        </p>
+        <div class="visitor-counter">
+            You are viewer <span class="counter-num" id="counter">000,042,069</span> 😏
+        </div>
+    </footer>
+
+    <script>
+        function handleSignup(e) {
+            e.preventDefault();
+            const input = e.target.querySelector('input');
+            input.value = '';
+            input.placeholder = '🔥 You\'re on the list!';
+            input.style.borderColor = '#FF4500';
+            setTimeout(() => {
+                input.placeholder = 'Enter your email to join the waitlist';
+                input.style.borderColor = '#333';
+            }, 3000);
+        }
+
+        let count = 42069;
+        setInterval(() => {
+            count += Math.floor(Math.random() * 3);
+            document.getElementById('counter').textContent =
+                count.toLocaleString().padStart(10, '0');
+        }, 5000);
+    </script>
+
+</body>
+</html>
