@@ -55,16 +55,14 @@ Landing Page → Sign Up → Create Profile → Train Your Agent → Ready to Pl
 - Upload 3-5 photos (used for your profile AND to generate your avatar)
 
 **Train Your Agent (the magic moment):**
-- Record a 2-minute video of yourself talking naturally (prompted with fun questions)
-  - "Tell me about your most embarrassing date"
-  - "What's your hottest take?"
-  - "Describe your ideal Sunday"
+- Take 2 selfies: face forward + turn to the side (gives avatar model 3D face geometry)
+- Record 30 seconds of voice: read a fun prompt or just talk naturally (enough for voice cloning)
 - Answer 20 rapid-fire personality questions (humor style, deal-breakers, interests)
-- Optional: connect Spotify, import a few text convos, add voice notes
-- System generates: voice clone + avatar model + personality profile
-- User previews their agent ("Here's your AI twin — say hi!") and can redo
+- Optional: connect Spotify, import a few text convos for style matching
+- System generates: voice clone + avatar model + personality profile (processing in background)
+- User gets a preview when ready ("Here's your AI twin — say hi!") and can redo
 
-**Time to play:** ~5-8 minutes from landing page to first video date.
+**Time to play:** ~3 minutes from landing page to first video date.
 
 ### 2.2 The Game Loop
 
@@ -360,8 +358,8 @@ User A (browser)              LiveKit SFU        AI Pipeline         Agent B (se
 ### 5.2 Avatar Generation Pipeline
 
 **Option A: HeyGen Interactive Avatar (MVP — fastest to market)**
-- User uploads 2-min training video during onboarding
-- HeyGen generates a personalized avatar model
+- User uploads 2 selfies (front + side) + 30s voice recording during onboarding
+- HeyGen generates a personalized avatar model from photos
 - Real-time streaming avatar API: send audio → get video frames
 - Latency: ~500ms
 - Cost: ~$0.10-0.50/min
@@ -446,7 +444,8 @@ Each user's agent has a **personality profile** composed of:
       "communicationStyle": "asks questions, tells stories, uses callbacks"
     },
     "trainingData": {
-      "videoTranscript": "...(from onboarding video)...",
+      "selfies": ["front_face_url", "side_face_url"],
+      "voiceRecording": "30s_audio_url",
       "quizAnswers": {...},
       "voiceProfile": "elevenlabs_voice_id_xyz",
       "avatarModel": "heygen_avatar_id_xyz"
