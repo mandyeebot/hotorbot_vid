@@ -58,9 +58,10 @@ Landing Page → Sign Up → Create Profile → Train Your Agent → Ready to Pl
 - Take 2 selfies: face forward + turn to the side (gives avatar model 3D face geometry)
 - Record a voice sample: read the prompt *"Sorry I'm not home right now, I'm walking through a spiderweb. Leave a message and I'll call you back."* (~7 seconds, enough for instant voice clone)
 - Answer 20 rapid-fire personality questions (humor style, deal-breakers, interests)
-- Choose your agent mode:
-  - **Voicemail mode (safe):** If you don't show up, your AI plays your greeting with your avatar. Low risk, still in the game.
-  - **Full agent mode (chaos):** Your AI shows up AS you, improvises the whole conversation. Unvetted, unpredictable, that's the fun.
+- Choose what happens when you're not there:
+  - **Default away message:** Your avatar plays the spiderweb greeting. Automatic, zero effort. Everyone gets this.
+  - **Custom away message:** Record your own away message for your avatar to play.
+  - **Full AI agent (opt-in):** Your AI shows up AS you and has a real free-flowing conversation. Unvetted, unpredictable — that's the fun.
 - Optional: connect Spotify, import a few text convos for style matching
 - System generates: voice clone + avatar model + personality profile (processing in background)
 - User gets a preview when ready ("Here's your AI twin — say hi!") and can redo
